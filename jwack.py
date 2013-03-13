@@ -13,7 +13,7 @@ _waitfds = {}
 def _debug(s):
     if 0:
         sys.stderr.write('jwack#%d: %s' % (os.getpid(),s))
-    
+
 
 def _release(n):
     global _mytokens

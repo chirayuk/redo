@@ -8,11 +8,13 @@
 #
 
 # By default, no output coloring.
+blue=""
 green=""
 bold=""
 plain=""
 
 if [ -n "$TERM" -a "$TERM" != "dumb" ] && tty <&2 >/dev/null 2>&1; then
+  blue="$(printf '\033[34m')"
 	green="$(printf '\033[32m')"
 	bold="$(printf '\033[1m')"
 	plain="$(printf '\033[m')"
@@ -109,7 +111,7 @@ _do()
 	local dir=$1 target=$2 tmp=$3
 	if [ ! -e "$target" ] || [ -d "$target" -a ! -e "$target.did" ]; then
 		printf '%sdo  %s%s%s%s\n' \
-			"$green" "$DO_DEPTH" "$bold" "$dir$target" "$plain" >&2
+			"$blue" "$DO_DEPTH" "$bold" "$dir$target" "$plain" >&2
 		echo "$PWD/$target" >>"$DO_BUILT"
 		dofile=$target.do
 		base=$target

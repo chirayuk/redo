@@ -2,20 +2,30 @@ import sys, os
 import vars
 
 # By default, no output colouring.
-RED    = ""
-GREEN  = ""
-YELLOW = ""
-BOLD   = ""
-PLAIN  = ""
+RED     = ""
+GREEN   = ""
+YELLOW  = ""
+BLUE    = ""
+MAGENTA = ""
+CYAN    = ""
+BLUE    = ""
+BOLD    = ""
+PLAIN   = ""
 
 if sys.stderr.isatty() and (os.environ.get('TERM') or 'dumb') != 'dumb':
     # ...use ANSI formatting codes.
-    RED    = "\x1b[31m"
-    GREEN  = "\x1b[32m"
-    YELLOW = "\x1b[33m"
-    BOLD   = "\x1b[1m"
-    PLAIN  = "\x1b[m"
+    RED     = "\x1b[31m"
+    GREEN   = "\x1b[32m"
+    YELLOW  = "\x1b[33m"
+    BLUE    = "\x1b[34m"
+    MAGENTA = "\x1b[35m"
+    CYAN    = "\x1b[36m"
+    BOLD    = "\x1b[1m"
+    PLAIN   = "\x1b[m"
 
+LOG_COLOR  = BLUE
+WARN_COLOR = MAGENTA
+ERR_COLOR  = RED
 
 def log_(s):
     sys.stdout.flush()
@@ -27,13 +37,13 @@ def log_(s):
 
 
 def log(s):
-    log_(''.join([GREEN,  "redo  ", vars.DEPTH, BOLD, s, PLAIN]))
+    log_(''.join([LOG_COLOR,  BOLD, "redo  ", PLAIN, LOG_COLOR, vars.DEPTH, s]))
 
 def err(s):
-    log_(''.join([RED,    "redo  ", vars.DEPTH, BOLD, s, PLAIN]))
+    log_(''.join([ERR_COLOR,  BOLD, "redo  ", PLAIN, ERR_COLOR, vars.DEPTH, s]))
 
 def warn(s):
-    log_(''.join([YELLOW, "redo  ", vars.DEPTH, BOLD, s, PLAIN]))
+    log_(''.join([WARN_COLOR, BOLD, "redo  ", PLAIN, WARN_COLOR, vars.DEPTH, s]))
 
 
 def debug(s):
